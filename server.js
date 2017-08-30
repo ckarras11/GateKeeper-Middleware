@@ -65,7 +65,13 @@ const USERS = [
 //     (aka, `req.user = matchedUser`)
 function gateKeeper(req, res, next) {
   // your code should replace the line below
-  next();
+  let creds = req.get('x-username-and-password')
+  app.use(queryString);
+  let login = queryString.parse(creds);
+  if(USERS.find(login.userName) && USERS.find(login.password)){
+    req.user = 'freddy'
+  }
+
 }
 
 // Add the middleware to your app!
